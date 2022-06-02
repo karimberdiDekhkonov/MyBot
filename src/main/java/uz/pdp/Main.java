@@ -28,12 +28,14 @@ public class Main extends TelegramLongPollingBot {
     public String getBotUsername() {
         return "WebServiceUzBot";
     }
-
+    static boolean auto = true;
     @Override
     public String getBotToken() {
         return "5543864112:AAFEB_qj2IqLC8CSXI2eB5Cz_2ZcCBADQEM";
     }
+
     public static int users = 0;
+
     @Override
     public void onUpdateReceived(Update update) {
         SendMessage sendMessage = new SendMessage();
@@ -41,34 +43,43 @@ public class Main extends TelegramLongPollingBot {
         Message message = update.getMessage();
         String text = message.getText();
 
+
+
         if (text.equals("/start")) {
             users++;
             sendMessage.setText("Sizga qanday yordam bera olamiz ?\nYani qanday platforma yaratmoqchisiz?");
-        }else if (text.equals("getUsers0921")){
-            sendMessage.setText("Umumiy startlar soni: "+String.valueOf(users));
+
+            ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
+            sendMessage.setReplyMarkup(markup);
+            markup.setResizeKeyboard(true);
+            markup.setOneTimeKeyboard(true);
+            markup.setSelective(true);
+            List<KeyboardRow> keyboardRows = new ArrayList<>();
+            KeyboardRow row1 = new KeyboardRow();
+            KeyboardRow row2 = new KeyboardRow();
+            row1.add("Telegram Bot");
+            row1.add("Website");
+            row2.add("Korxonani Tizimlashtirish");
+            keyboardRows.add(row1);
+            keyboardRows.add(row2);
+            markup.setKeyboard(keyboardRows);
+        } else if (text.equals("getUsers0921")) {
+            sendMessage.setText("Umumiy startlar soni: " + users);
+        } else if (text.equals("Telegram Bot")) {
+            sendMessage.setText("Tushunarli \nBot bajarishi kerak bo'lgan vazifalarni qisqacha yoritib o'ting!");
+        }else if (text.equals("Website")) {
+            sendMessage.setText("Tushunarli \nWebsite bajarishi kerak bo'lgan vazifalarni qisqacha yoritib o'ting!");
         }else {
-            sendMessage.setText("Hurmatli " + message.getChat().getFirstName() + " murojatingiz qabul qilindi yaqin daqiqqalar ichida siz bilan bog'lanamiz \uD83D\uDE0A\uD83D\uDE0A ");
-
+            if (auto) {
+                sendMessage.setText("Hurmatli " + message.getChat().getFirstName() + " murojatingiz qabul qilindi yaqin daqiqqalar ichida siz bilan bog'lanamiz \uD83D\uDE0A\uD83D\uDE0A ");
+                auto=false;
+            }else {
+                sendMessage.setText("");
+            }
         }
-        ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(markup);
-        markup.setResizeKeyboard(true);
-        markup.setOneTimeKeyboard(true);
-        markup.setSelective(true);
 
-        List<KeyboardRow> keyboardRows = new ArrayList<>();
-        KeyboardRow row1 = new KeyboardRow();
-        KeyboardRow row2 = new KeyboardRow();
-        KeyboardButton bot = new KeyboardButton("Telegram Bot");
-        KeyboardButton web = new KeyboardButton("Website");
-        KeyboardButton tiz = new KeyboardButton("Korxonani Tizimlashtirish");
-        row1.add(bot);
-        row1.add(web);
-        row2.add(tiz);
 
-        keyboardRows.add(row1);
-        keyboardRows.add(row2);
-        markup.setKeyboard(keyboardRows);
+
         try {
             execute(sendMessage);
         } catch (TelegramApiException e) {
