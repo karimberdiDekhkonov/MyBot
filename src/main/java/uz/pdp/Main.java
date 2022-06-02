@@ -60,7 +60,7 @@ public class Main extends TelegramLongPollingBot {
         KeyboardRow row2 = new KeyboardRow();
         KeyboardButton bot = new KeyboardButton("Telegram Bot");
         KeyboardButton web = new KeyboardButton("Website");
-        KeyboardButton tiz = new KeyboardButton("Korxoani Tizimlashtirish");
+        KeyboardButton tiz = new KeyboardButton("Korxonani Tizimlashtirish");
         row1.add(bot);
         row1.add(web);
         row2.add(tiz);
