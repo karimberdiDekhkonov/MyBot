@@ -40,13 +40,14 @@ public class Main extends TelegramLongPollingBot {
         sendMessage.setChatId(String.valueOf(update.getMessage().getChatId()));
         Message message = update.getMessage();
         String text = message.getText();
+
         if (text.equals("/start")) {
             users++;
-            sendMessage.setText("Assalomu Alaykum hizmat ko'rsatish botimizga xush kelibsiz \uD83D\uDE0A \nSizga qanday hizmat ko'rsata olamiz ?");
+            sendMessage.setText("Sizga qanday yordam bera olamiz ?\nYani qanday platforma yaratmoqchisiz?");
         }else if (text.equals("getUsers0921")){
-            sendMessage.setText("Foydalanuvchilar soni: "+String.valueOf(users));
+            sendMessage.setText("Umumiy startlar soni: "+String.valueOf(users));
         }else {
-            sendMessage.setText("Hurmatli " + message.getChat().getFirstName() + " murojatingiz qabul qilindi yaqin daqiqqalar ichida siz bilan bog'lanamiz \uD83D\uDE0A ");
+            sendMessage.setText("Hurmatli " + message.getChat().getFirstName() + " murojatingiz qabul qilindi yaqin daqiqqalar ichida siz bilan bog'lanamiz \uD83D\uDE0A\uD83D\uDE0A ");
 
         }
         ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
