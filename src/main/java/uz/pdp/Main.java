@@ -26,12 +26,12 @@ public class Main extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "UzDoshBot";
+        return "WebServiceUzBot";
     }
 
     @Override
     public String getBotToken() {
-        return "5223487862:AAHxsl6eiZlEm4ijxmExvd5dE-kJj4GlYeY";
+        return "5543864112:AAFEB_qj2IqLC8CSXI2eB5Cz_2ZcCBADQEM";
     }
     public static int users = 0;
     @Override
